@@ -4,12 +4,16 @@ const axios = require("axios");
 const fs = require("fs");
 const { promisify } = require("util");
 const writeFileAsync = promisify(fs.writeFile);
+const cors = require("cors");
 const app = express();
+
 app.use(express.json());
+app.use(cors());
 
 const db_configuration = './config.json';
-const rawdata = fs.readFileSync(configPath);
+const rawdata = fs.readFileSync(db_configuration);
 const config = JSON.parse(rawdata);
+
 
 mongoose.connect(config.mongodbUri, {
   useNewUrlParser: true,
