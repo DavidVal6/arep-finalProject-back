@@ -14,8 +14,8 @@ const db_configuration = './config.json';
 const rawdata = fs.readFileSync(db_configuration);
 const config = JSON.parse(rawdata);
 
-
-mongoose.connect(config.mongodbUri, {
+const mongodbUri = process.env.MONGODB_URI || config.mongodbUri;
+mongoose.connect(mongodbUri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
